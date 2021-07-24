@@ -28,6 +28,15 @@ class AppSpec extends Specification {
         result == new ObjectMapper().writeValueAsString(App.getTasks())
     }
 
+    def "should return an object as json"() {
+        given:
+        String id = "1"
+        when:
+        String result = app.getHttpClient().getText("/tasks/$id")
+        then:
+        result == new ObjectMapper().writeValueAsString(App.getTasks().get(0))
+    }
+
     def cleanSpec() {
         app.close()
     }
