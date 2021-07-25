@@ -1,11 +1,9 @@
 package info.developia.ratpack.poc.model;
 
-public record Task(String title, String description) {
-    public String getTitle() {
-        return title;
-    }
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-    public String getDescription() {
-        return description;
-    }
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonSerialize
+public record Task(String id, String title, String description) {
 }

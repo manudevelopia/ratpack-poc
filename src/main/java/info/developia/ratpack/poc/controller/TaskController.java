@@ -8,8 +8,10 @@ import static info.developia.ratpack.poc.App.getTasks;
 public class TaskController {
 
     public void getTask(Context ctx) {
-        int id = ctx.getPathTokens().asInt("id");
-        ctx.render(Jackson.json(getTasks().get(0)));
+        var id = ctx.getPathTokens().get("id");
+        getTasks().stream().filter(t -> t.id().equals(id)).findFirst().ifPresentOrElse(
+                task -> ctx.render(Jackson.json(task)),
+                () -> ctx.getResponse().status(404).send());
     }
 
     public void getAllTasks(Context ctx) {

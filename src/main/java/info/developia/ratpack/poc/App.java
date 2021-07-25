@@ -15,8 +15,8 @@ public class App {
 
     public static List<Task> getTasks() {
         return List.of(
-                new Task("title 1", "description 1"),
-                new Task("title 2", "description 2")
+                new Task("7c3706cb","title 1", "description 1"),
+                new Task("7410dfaa","title 2", "description 2")
         );
     }
 
