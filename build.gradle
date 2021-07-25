@@ -18,10 +18,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
 }
 
-application {
-    mainClass = 'info.developia.ratpack.poc.App'
-}
-
 tasks.named('test') {
     useJUnitPlatform()
 }
