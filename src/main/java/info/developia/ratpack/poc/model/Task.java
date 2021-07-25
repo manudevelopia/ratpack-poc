@@ -1,9 +1,11 @@
 package info.developia.ratpack.poc.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-@JsonSerialize
-public record Task(String id, String title, String description) {
+@Data
+public class Task {
+    private final String tid;
+    private final String title;
+    private final String description;
+    private final boolean done;
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class TaskRepository extends Repository<TaskMapper> {
 
-    List<Task> getAll() {
+    public List<Task> getAll() {
         try {
             return repository(TaskMapper::getAll);
         } catch (PersistenceException e) {
@@ -17,7 +17,7 @@ public class TaskRepository extends Repository<TaskMapper> {
         }
     }
 
-    Optional<Task> getById(String tid) {
+    public Optional<Task> getById(String tid) {
         try {
             return Optional.ofNullable(repository(tm -> tm.getById(tid)));
         } catch (PersistenceException e) {

@@ -13,12 +13,12 @@ public class App {
         return "Hello World!";
     }
 
-    public static List<Task> getTasks() {
-        return List.of(
-                new Task("7c3706cb","title 1", "description 1"),
-                new Task("7410dfaa","title 2", "description 2")
-        );
-    }
+//    public static List<Task> getTasks() {
+//        return List.of(
+//                new Task("7c3706cb","title 1", "description 1"),
+//                new Task("7410dfaa","title 2", "description 2")
+//        );
+//    }
 
     public static void main(String[] args) throws Exception {
         final TaskController taskController = new TaskController();
