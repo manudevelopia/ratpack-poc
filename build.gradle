@@ -9,13 +9,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.guava:guava:30.0-jre'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.0'
+    implementation 'org.mybatis:mybatis:3.5.5'
 
-    runtimeOnly "org.slf4j:slf4j-simple:1.7.30"
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.30'
+    runtimeOnly 'org.postgresql:postgresql:42.2.14'
 
     testImplementation 'org.codehaus.groovy:groovy:3.0.8'
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
     testImplementation 'junit:junit:4.13.1'
+}
+
+application {
+    mainClass = 'info.developia.ratpack.poc.App'
 }
 
 tasks.named('test') {
