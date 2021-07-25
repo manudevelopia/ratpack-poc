@@ -1,7 +1,8 @@
 package info.developia.ratpack.poc.repository;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
@@ -38,17 +39,27 @@ abstract class Repository<T> {
 
     private static SqlSessionFactory buildSqlSessionFactory(String mappersPackageName) {
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-        DataSource dataSource = new PooledDataSource(
-                "org.postgresql.Driver",
-                dotenv.get("DATABASE_URL_CONN"),
-                dotenv.get("DATABASE_USERNAME"),
-                dotenv.get("DATABASE_PASSWORD"));
+        DataSource dataSource = getHikariDataSource();
 
         Environment environment = new Environment("Default", new JdbcTransactionFactory(), dataSource);
         Configuration configuration = new Configuration(environment);
         configuration.addMappers(mappersPackageName);
 
         return new SqlSessionFactoryBuilder().build(configuration);
+    }
+
+    private static HikariDataSource getHikariDataSource() {
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("org.postgresql.Driver");
+        config.setJdbcUrl(dotenv.get("DATABASE_URL_CONN"));
+        config.setUsername(dotenv.get("DATABASE_USERNAME"));
+        config.setPassword(dotenv.get("DATABASE_PASSWORD"));
+        config.setAutoCommit(false);
+        config.setMaximumPoolSize(10);
+        config.setMinimumIdle(4);
+        config.setConnectionTestQuery("SELECT 1");
+        return new HikariDataSource(config);
     }
 
     static SqlSessionFactory getSession(String mappersPackageName) {
