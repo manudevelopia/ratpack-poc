@@ -1,7 +1,7 @@
 plugins {
     id 'groovy'
-    id 'application'
     id "io.ratpack.ratpack-java" version "1.9.0"
+    id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 repositories {
@@ -16,10 +16,6 @@ dependencies {
     testImplementation 'org.codehaus.groovy:groovy:3.0.8'
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
     testImplementation 'junit:junit:4.13.1'
-}
-
-application {
-    mainClass = 'info.developia.ratpack.poc.App'
 }
 
 tasks.named('test') {
