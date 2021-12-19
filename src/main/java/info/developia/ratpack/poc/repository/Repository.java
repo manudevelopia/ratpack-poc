@@ -38,7 +38,7 @@ abstract class Repository<T> {
     }
 
     private static SqlSessionFactory buildSqlSessionFactory(String mappersPackageName) {
-        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+        Dotenv.configure().ignoreIfMissing().load();
         DataSource dataSource = getHikariDataSource();
 
         Environment environment = new Environment("Default", new JdbcTransactionFactory(), dataSource);
