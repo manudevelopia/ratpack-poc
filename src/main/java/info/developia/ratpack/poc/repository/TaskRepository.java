@@ -1,5 +1,7 @@
 package info.developia.ratpack.poc.repository;
 
+import info.developia.ratpack.poc.lib.persistence.PersistenceException;
+import info.developia.ratpack.poc.lib.persistence.Repository;
 import info.developia.ratpack.poc.model.Task;
 import info.developia.ratpack.poc.repository.mapper.TaskMapper;
 import info.developia.ratpack.poc.service.TaskServiceException;

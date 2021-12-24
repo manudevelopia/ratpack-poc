@@ -1,4 +1,4 @@
-package info.developia.ratpack.poc.repository;
+package info.developia.ratpack.poc.lib.persistence;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -14,11 +14,11 @@ import javax.sql.DataSource;
 import java.lang.reflect.ParameterizedType;
 import java.util.function.Function;
 
-abstract class Repository<T> {
+public abstract class Repository<T> {
     private final Class<T> typeParameterClass = getTypeParameterClass();
     private static SqlSessionFactory sqlSessionFactory;
 
-    Repository() {
+    public Repository() {
         sqlSessionFactory = getSession(typeParameterClass.getPackageName());
     }
 
@@ -27,14 +27,11 @@ abstract class Repository<T> {
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    <K> K repository(Function<T, K> name) {
-        try (SqlSession session = sqlSessionFactory.openSession()) {
-            K result = name.apply(session.getMapper(typeParameterClass));
-            session.commit();
-            return result;
-        } catch (Exception e) {
-            throw new PersistenceException(e.getMessage());
+    private static SqlSessionFactory getSession(String mappersPackageName) {
+        if (sqlSessionFactory == null) {
+            sqlSessionFactory = buildSqlSessionFactory(mappersPackageName);
         }
+        return sqlSessionFactory;
     }
 
     private static SqlSessionFactory buildSqlSessionFactory(String mappersPackageName) {
@@ -62,10 +59,13 @@ abstract class Repository<T> {
         return new HikariDataSource(config);
     }
 
-    static SqlSessionFactory getSession(String mappersPackageName) {
-        if (sqlSessionFactory == null) {
-            sqlSessionFactory = buildSqlSessionFactory(mappersPackageName);
+    public <K> K repository(Function<T, K> name) {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            K result = name.apply(session.getMapper(typeParameterClass));
+            session.commit();
+            return result;
+        } catch (Exception e) {
+            throw new PersistenceException(e.getMessage());
         }
-        return sqlSessionFactory;
     }
 }
