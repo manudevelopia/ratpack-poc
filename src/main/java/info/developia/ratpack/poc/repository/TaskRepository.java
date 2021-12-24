@@ -27,7 +27,7 @@ public class TaskRepository extends Repository<TaskMapper> {
 
     void create(Task task) {
         try {
-            repository(tm -> tm.create(task));
+            repository(taskMapper -> taskMapper.create(task));
         } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage());
         }
@@ -35,7 +35,7 @@ public class TaskRepository extends Repository<TaskMapper> {
 
     void update(Task task) {
         try {
-            repository(tm -> tm.update(task));
+            repository(taskMapper -> taskMapper.update(task));
         } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage());
         }
@@ -43,7 +43,7 @@ public class TaskRepository extends Repository<TaskMapper> {
 
     void markDoneAs(Task task) {
         try {
-            repository(tm -> tm.markDoneAs(task));
+            repository(taskMapper -> taskMapper.markDoneAs(task));
         } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage());
         }
