@@ -1,10 +1,11 @@
 package info.developia.ratpack.poc
 
-
 import ratpack.test.MainClassApplicationUnderTest
+import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 
+@Ignore
 class AppSpec extends Specification {
 
     @Shared
