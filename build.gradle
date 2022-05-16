@@ -6,11 +6,14 @@ plugins {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'info.developia:hodor:1.0-SNAPSHOT'
+    implementation 'info.developia:hodor:1.0-SNAPSHOT'
 
     implementation 'io.github.cdimascio:dotenv-java:2.2.3'
     implementation 'org.mybatis:mybatis:3.5.7'
