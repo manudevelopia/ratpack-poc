@@ -10,20 +10,18 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'info.developia:hodor:1.0-SNAPSHOT'
-    implementation 'info.developia:hodor:1.0-SNAPSHOT'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     implementation 'io.github.cdimascio:dotenv-java:2.2.3'
-    implementation 'org.mybatis:mybatis:3.5.7'
-    implementation 'com.zaxxer:HikariCP:5.0.0'
+    implementation 'org.mybatis:mybatis:3.5.9'
+    implementation 'com.zaxxer:HikariCP:5.0.1'
 
-    runtimeOnly 'org.slf4j:slf4j-simple:1.7.32'
-    runtimeOnly 'org.postgresql:postgresql:42.3.1'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
+    runtimeOnly 'org.postgresql:postgresql:42.3.4'
 
-    testImplementation 'org.codehaus.groovy:groovy:3.0.8'
-    testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+    testImplementation 'org.codehaus.groovy:groovy:3.0.10'
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
     testImplementation 'junit:junit:4.13.2'
 }
 
